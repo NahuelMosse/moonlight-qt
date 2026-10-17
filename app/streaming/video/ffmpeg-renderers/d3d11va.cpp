@@ -1498,7 +1498,10 @@ int D3D11VARenderer::getRendererAttributes()
 
 int D3D11VARenderer::getDecoderCapabilities()
 {
-    return CAPABILITY_REFERENCE_FRAME_INVALIDATION_HEVC |
+    // H.264 as well: a host that can invalidate references repairs a lost frame by predicting
+    // from an older one the decoder still has, instead of sending an IDR frame
+    return CAPABILITY_REFERENCE_FRAME_INVALIDATION_AVC |
+           CAPABILITY_REFERENCE_FRAME_INVALIDATION_HEVC |
            CAPABILITY_REFERENCE_FRAME_INVALIDATION_AV1;
 }
 
